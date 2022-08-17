@@ -33,17 +33,16 @@ echo "Sending checkpoint signal to process $PROCESS"
 echo "Wait up to 60s for snapshot to be complete"
 retries=12
 while [ $retries -gt 0 ]; do
-    if [ kill -0 $PROCESS 2>/dev/null ]; then
+    if kill -0 $PROCESS 2>/dev/null; then
         echo ".done"
         break
     fi
-    echo "Remaining retries $retries --- processes are:"
-    ps aux
+    echo -n "."
     sleep 5
     retries=$((retries - 1))
 done
 
-if [ kill -0 $PROCESS 2>/dev/null ]; then
+if kill -0 $PROCESS 2>/dev/null; then
     echo "Snapshotting complete"
 else
     echo "Snapshotting failed"
