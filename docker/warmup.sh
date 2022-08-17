@@ -31,8 +31,8 @@ echo "Sending checkpoint signal to process $PROCESS"
 /azul-crac-jdk/bin/jcmd $PROCESS JDK.checkpoint
 ls -lh /home/app/cr
 
-echo "Wait up to 20s for snapshot to be complete"
-retries=10
+echo "Wait up to 60s for snapshot to be complete"
+retries=30
 while [ $retries -gt 0 ]; do
     if [ kill -0 $PROCESS 2>/dev/null ]; then
         echo ".done"
