@@ -24,7 +24,14 @@ docker run \
   -p 8080:8080 \
   checkpoint
 
+# Build our runtime image
 docker build \
   -f docker/RuntimeImage.docker \
   --tag hello-crac:1.0 \
   build/docker/main
+
+# Run the runtime image
+docker run \
+  --privileged \
+  -p 8080:8080 \
+  hello-crac:1.0

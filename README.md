@@ -7,7 +7,7 @@ It includes the experimental CRaC support, and I am trying to generate a docker 
 To generate the image, run the following command:
 
 ```
-./createDockerCheckpoint.sh
+./build.sh
 ```
 
 This is a work in progress...
