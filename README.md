@@ -57,4 +57,8 @@ JVM: invalid info for restore provided (may be failed checkpoint)
 .done
 EXITED WITH 134
 ```
-Tried running the script as root as well, but that also fails the same way... 
+Tried running the script as root as well, but that also fails the same way...
+
+#### EC2 Ubuntu box
+
+Fails the same as Ubuntu in Parallels
