@@ -10,15 +10,42 @@ To generate the image, run the following command:
 ./build.sh
 ```
 
-### Results:
+> ℹ️ After the below investigations, you need to use ubuntu 18.04...  It doesn't work with 22 either as a base image, or a host OS
+---
+
+### Results with `ubuntu:18.04` as the base image:
 
 #### M1 Mac
 
-Doesn't work (as expected), the emulation is too slow
+☑️ Doesn't work (as expected), the emulation is too slow
 
 #### x86 Mac
 
-Gets all the way to running the image, but then fails with:
+✅ Works, and generates a runnable image...  I need to investigate the "_Time to first request_" metric.
+
+#### x86 Mac running Ubuntu (22) in Parallels
+
+❌ Fails as below with `ubuntu:latest` as the base image.
+
+#### EC2 Ubuntu (18) box
+
+✅ Works!  Slight permissions issue as the CR files get created owned by Root.  So you either need to insert a `chmod` or run the script as root
+
+#### EC2 Ubuntu (22) box
+
+❌ Fails as below with `ubuntu:latest` as the base image.
+
+---
+
+### Results with `ubuntu:latest` as the base image:
+
+#### M1 Mac
+
+☑️ Doesn't work (as expected), the emulation is too slow
+
+#### x86 Mac
+
+❌ Gets all the way to running the image, but then fails with:
 
 ```
 Error (criu/util.c:618): exited, status=1
@@ -30,7 +57,7 @@ Error (criu/cr-restore.c:2400): Restoring FAILED.
 
 #### x86 Mac running Ubuntu (22) in Parallels
 
-Fails after it sends `JDK.checkpoint` to the process with:
+❌ Fails after it sends `JDK.checkpoint` to the process with:
 
 ```
 STARTUPTIME 18066422503692 restore-native
@@ -61,6 +88,6 @@ Tried running the script as root as well, but that also fails the same way...
 
 #### EC2 Ubuntu (22) box
 
-Fails the same as Ubuntu in Parallels
+❌ Fails the same as Ubuntu in Parallels
 
 Tried running as root as well, and also failed...
