@@ -15,9 +15,17 @@ PROCESS=$!
 echo "Started application as process $PROCESS"
 
 # Wait for the app to be started
-# TODO: Make this cleverer
 echo "Waiting for application to start"
-sleep 10
+retries=30
+until $(curl --output /dev/null --silent --head --fail http://localhost:8080); do
+  if [ $retries -le 0 ]; then
+    echo "failed"
+    exit 1
+  fi
+  echo -n '.'
+  sleep 2
+  retries=$((retries - 1))
+done
 
 # Warm up the app.  For now, just call curl, we may want a way for this to be configurable
 echo "Warming up application"
