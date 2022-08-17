@@ -12,4 +12,4 @@ COPY layers/classes /home/app/classes
 COPY layers/resources /home/app/resources
 COPY layers/application.jar /home/app/application.jar
 
-ENTRYPOINT ["/azul-crac-jdk", "-XX:CRaCRestoreFrom=cr"]
+ENTRYPOINT ["/azul-crac-jdk/bin/java", "-XX:CRaCRestoreFrom=cr"]
