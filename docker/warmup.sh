@@ -7,16 +7,17 @@ echo "Starting application"
 # Run the app in the background
 /azul-crac-jdk/bin/java \
   -XX:CRaCCheckpointTo=cr \
-#  -XX:+UnlockDiagnosticVMOptions \
-#  -XX:+CRTraceStartupTime \
-#  -Djdk.crac.trace-startup-time=true \
   -jar application.jar &
 PROCESS=$!
 echo "Started application as process $PROCESS"
 
+#  -XX:+UnlockDiagnosticVMOptions \
+#  -XX:+CRTraceStartupTime \
+#  -Djdk.crac.trace-startup-time=true \
+
 # Wait for the app to be started
-echo "Waiting for application to start"
-retries=30
+echo "Waiting 10s for application to start"
+retries=5
 until $(curl --output /dev/null --silent --head --fail http://localhost:8080); do
   if [ $retries -le 0 ]; then
     echo "failed"
