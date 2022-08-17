@@ -28,7 +28,7 @@ Error (criu/cr-restore.c:1483): 7 killed by signal 11: Segmentation fault
 Error (criu/cr-restore.c:2400): Restoring FAILED.
 ```
 
-#### x86 Mac running Ubuntu in Parallels
+#### x86 Mac running Ubuntu (22) in Parallels
 
 Fails after it sends `JDK.checkpoint` to the process with:
 
@@ -59,6 +59,8 @@ EXITED WITH 134
 ```
 Tried running the script as root as well, but that also fails the same way...
 
-#### EC2 Ubuntu box
+#### EC2 Ubuntu (22) box
 
 Fails the same as Ubuntu in Parallels
+
+Tried running as root as well, and also failed...
