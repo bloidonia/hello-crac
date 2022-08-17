@@ -1,10 +1,8 @@
-FROM --platform=linux/amd64 alpine:3.16.2
+FROM --platform=linux/amd64 ubuntu:latest
 WORKDIR /home/app
 
-RUN apk update \
-    && apk upgrade \
-    && apk add curl jq \
-    && rm -rf /var/cache/apk/*
+RUN apt-get update \
+    && apt-get install -y curl jq
 
 ### Install latest Azul CRaC OpenJDK build
 RUN release="$(curl -sL https://api.github.com/repos/CRaC/openjdk-builds/releases/latest)" \
