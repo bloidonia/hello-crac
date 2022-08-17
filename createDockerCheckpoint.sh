@@ -6,6 +6,7 @@ set -e
 
 # Copy the warmup script into the build
 cp docker/warmup.sh build/docker/main
+rm -rf build/docker/main/layers/cr
 
 # Create our checkpoint image
 docker build \
