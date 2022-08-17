@@ -10,9 +10,9 @@ rm -rf build/docker/main/layers/cr
 
 # Create our checkpoint image
 docker build \
-    -f docker/CheckpointImage.docker \
-    --tag checkpoint \
-    build/docker/main
+  -f docker/CheckpointImage.docker \
+  --tag checkpoint \
+  build/docker/main
 
 # Run the checkpoint image
 docker run \
@@ -24,3 +24,7 @@ docker run \
   -p 8080:8080 \
   checkpoint
 
+docker build \
+  -f docker/RuntimeImage.docker \
+  --tag hello-crac:1.0 \
+  build/docker/main
