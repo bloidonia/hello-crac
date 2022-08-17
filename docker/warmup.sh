@@ -1,18 +1,16 @@
 #!/bin/bash
 
-set -e
-
 # Set a trap to close the app once the script finishes
-trap 'echo "Killing $PROCESS" && kill $PROCESS' EXIT
+trap 'echo "Killing $PROCESS" && kill -0 $PROCESS 2>/dev/null && kill $PROCESS' EXIT
 
 echo "Starting application"
 # Run the app in the background
 /azul-crac-jdk/bin/java \
-    -XX:CRaCCheckpointTo=cr \
-    -XX:+UnlockDiagnosticVMOptions \
-    -XX:+CRTraceStartupTime \
-    -Djdk.crac.trace-startup-time=true \
-    -jar application.jar &
+  -XX:CRaCCheckpointTo=cr \
+  -XX:+UnlockDiagnosticVMOptions \
+  -XX:+CRTraceStartupTime \
+  -Djdk.crac.trace-startup-time=true \
+  -jar application.jar &
 PROCESS=$!
 echo "Started application as process $PROCESS"
 
@@ -33,18 +31,24 @@ echo "Sending checkpoint signal to process $PROCESS"
 echo "Wait up to 60s for snapshot to be complete"
 retries=12
 while [ $retries -gt 0 ]; do
-    if kill -0 $PROCESS 2>/dev/null; then
-        echo ".done"
-        break
-    fi
-    echo -n "."
-    sleep 5
-    retries=$((retries - 1))
+  kill -0 $PROCESS 2>/dev/null
+  OK=$?
+  if [ $OK -eq 1 ] ; then
+    echo ".done"
+    break
+  fi
+  echo -n "$OK."
+  sleep 5
+  retries=$((retries - 1))
 done
 
-if kill -0 $PROCESS 2>/dev/null; then
-    echo "Snapshotting complete"
+kill -0 $PROCESS 2>/dev/null
+OK=$?
+if [ $OK -eq 1 ]; then
+  wait $PROCESS
+  echo "EXITED WITH $?"
+  echo "Snapshotting complete"
 else
-    echo "Snapshotting failed"
-    exit 1
+  echo "Snapshotting failed"
+  exit 1
 fi
