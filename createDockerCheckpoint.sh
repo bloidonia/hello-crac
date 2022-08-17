@@ -15,6 +15,7 @@ docker build \
 
 # Run the checkpoint image
 docker run \
+  --platform linux/amd64 \
   --privileged \
   --rm \
   --name crac-checkpoint \
