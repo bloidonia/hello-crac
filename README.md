@@ -2,14 +2,15 @@
 
 This is a simple Micronaut Framework application with a single endpoint `/hello` which returns "Hello World".
 
-It includes the experimental CRaC support, and the experimental crac gradle plugin.
+It includes the experimental CRaC support, and the experimental CRaC Gradle plugin.
 
-### Setup:
+### Prerequisites:
+
 1. Clone [micronaut-gradle-plugin](https://github.com/micronaut-projects/micronaut-gradle-plugin) check out the `crac-plugin` branch and run `./gradlew publishToMavenLocal`
 
 ### Building the image
 
-To generate the image **on an x86 linux/osx machine**, run:
+To generate the image **on an x86 linux/osx machine**, run (in this project folder):
 
 ```
 ./gradlew dockerBuildCrac
