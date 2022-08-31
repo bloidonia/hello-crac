@@ -5,8 +5,7 @@ This is a simple Micronaut Framework application with a single endpoint `/hello`
 It includes the experimental CRaC support, and the experimental crac gradle plugin.
 
 ### Setup:
-1. Clone [micronaut-crac](https://github.com/micronaut-projects/micronaut-crac) and run `./gradlew publishToMavenLocal`
-2. Clone [micronaut-gradle-plugin](https://github.com/micronaut-projects/micronaut-gradle-plugin) check out the `crac-plugin` branch and run `./gradlew publishToMavenLocal`
+1. Clone [micronaut-gradle-plugin](https://github.com/micronaut-projects/micronaut-gradle-plugin) check out the `crac-plugin` branch and run `./gradlew publishToMavenLocal`
 
 ### Building the image
 
@@ -26,6 +25,38 @@ docker run -p 8080:8080 --privileged hello:latest
 
 Then navigate to http://localhost:8080/hello/magic
 
+## Timings
+
+As with all timings, accuracy must be questioned, and nothing beats trying it yourself.
+
+### Setup
+
+1. Build the CRaC docker image as above with `./gradlew dockerBuildCrac`
+1. Rename this image with `docker tag hello:latest hello-crac:latest`
+1. Build the regular docker image with `./gradlew dockerBuild`
+1. Run the timing script for both images via:
+   1. `./timing.sh hello:latest` for the _regular_ image.
+   1. `./timing.sh hello-crac:latest` for the `CRaC` version.
+
+### Results
+
+The results I see on a `2.6 GHz 6-Core Intel Core i7` 2019 MBP with 16GB RAM and Docker Desktop 4.11.1:
+
+```
+➜  hello-crac git:(main) ✗ ./timing.sh hello:latest
+Hello tim!
+real	0m3.166s
+user	0m0.004s
+sys	0m0.006s
+
+➜  hello-crac git:(main) ✗ ./timing.sh hello-crac:latest
+Hello tim!
+real	0m1.030s
+user	0m0.005s
+sys	0m0.007s
+```
+
+So that's 3s wallclock time for the default image, and 1s for the CRaC image. 
 ## Notes
 
 ---
