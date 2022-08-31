@@ -1,15 +1,34 @@
 ## Hello CRaC
 
-This is a simple Micronaut Framework application with a single endpoint `/` which returns "Hello World".
+This is a simple Micronaut Framework application with a single endpoint `/hello` which returns "Hello World".
 
-It includes the experimental CRaC support, and I am trying to generate a docker image with a checkpoint.
+It includes the experimental CRaC support, and the experimental crac gradle plugin.
 
-To generate the image, run the following command:
+### Setup:
+1. Clone [micronaut-crac](https://github.com/micronaut-projects/micronaut-crac) and run `./gradlew publishToMavenLocal`
+2. Clone [micronaut-gradle-plugin](https://github.com/micronaut-projects/micronaut-gradle-plugin) check out the `crac-plugin` branch and run `./gradlew publishToMavenLocal`
+
+### Building the image
+
+To generate the image **on an x86 linux/osx machine**, run:
 
 ```
-./build.sh
+./gradlew dockerBuildCrac
 ```
 
+### Running the image:
+
+To run the image, run:
+
+```
+docker run -p 8080:8080 --privileged hello:latest
+```
+
+Then navigate to http://localhost:8080/hello/magic
+
+## Notes
+
+---
 > ℹ️ After the below investigations, you need to use ubuntu 18.04...  It doesn't work with 22 either as a base image, or a host OS
 ---
 
