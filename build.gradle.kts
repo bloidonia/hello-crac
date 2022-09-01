@@ -2,7 +2,8 @@ import java.net.URI
 
 plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.micronaut.application") version "3.5.2-SNAPSHOT"
+    id("io.micronaut.minimal.application") version "3.5.2-SNAPSHOT"
+    id("io.micronaut.docker") version "3.5.2-SNAPSHOT"
     id("io.micronaut.crac") version "3.5.2-SNAPSHOT"
 }
 
@@ -17,6 +18,7 @@ repositories {
 
 dependencies {
     annotationProcessor("io.micronaut:micronaut-http-validation")
+    implementation("io.micronaut:micronaut-management")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("jakarta.annotation:jakarta.annotation-api")
@@ -35,7 +37,6 @@ java {
     }
 }
 
-graalvmNative.toolchainDetection.set(false)
 micronaut {
     runtime("netty")
     testRuntime("junit5")

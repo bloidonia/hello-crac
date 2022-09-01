@@ -28,6 +28,11 @@ class HelloTest {
 
     @Test
     void endpointThere() {
-        assertEquals("Hello World", client.toBlocking().exchange("/", String.class).body());
+        assertEquals("Hello World!", client.toBlocking().exchange("/hello", String.class).body());
+    }
+
+    @Test
+    void pathRead() {
+        assertEquals("Hello Tim!", client.toBlocking().exchange("/hello/Tim", String.class).body());
     }
 }
