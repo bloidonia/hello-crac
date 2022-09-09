@@ -2,9 +2,9 @@ import java.net.URI
 
 plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.micronaut.minimal.application") version "3.5.2-SNAPSHOT"
-    id("io.micronaut.docker") version "3.5.2-SNAPSHOT"
-    id("io.micronaut.crac") version "3.5.2-SNAPSHOT"
+    id("io.micronaut.minimal.application") version "3.6.0-SNAPSHOT"
+    id("io.micronaut.docker") version "3.6.0-SNAPSHOT"
+    id("io.micronaut.crac") version "3.6.0-SNAPSHOT"
 }
 
 version = "0.1"
