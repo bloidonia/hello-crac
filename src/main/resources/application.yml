@@ -5,3 +5,16 @@ netty:
   default:
     allocator:
       max-order: 3
+app:
+  suffix: ${SUFFIX:World}
+
+endpoints:
+  beans:
+    enabled: true
+    sensitive: false
+  refresh:
+    enabled: true
+    sensitive: false
+  env:
+    enabled: true
+    sensitive: false

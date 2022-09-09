@@ -21,10 +21,22 @@ To generate the image **on an x86 linux/osx machine**, run (in this project fold
 To run the image, run:
 
 ```
-docker run -p 8080:8080 --privileged hello:latest
+$ docker run -d -p 8080:8080 --privileged hello:latest
+<< some hash >>
+$ curl localhost:8080/hello
+Hello World!
+$ curl localhost:8080/hello/magic
+Hello magic!
 ```
 
-Then navigate to http://localhost:8080/hello/magic
+The default response is configurable, so if you stop that container, then run:
+
+```
+$ docker run -d -p 8080:8080 --env JAVA_OPTS="-Dapp.suffix=Amigo" --privileged hello:latest
+<< some hash >>
+$ curl localhost:8080/hello
+Hello Amigo!
+```
 
 ## Timings
 
