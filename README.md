@@ -58,18 +58,18 @@ The results I see on a `2.6 GHz 6-Core Intel Core i7` 2019 MBP with 16GB RAM and
 ```
 ➜  hello-crac git:(main) ✗ ./timing.sh hello:latest
 Hello tim!
-real	0m3.166s
-user	0m0.004s
-sys	0m0.006s
+real	0m1.934s
+user	0m0.525s
+sys	0m0.714s
 
 ➜  hello-crac git:(main) ✗ ./timing.sh hello-crac:latest
 Hello tim!
-real	0m1.030s
-user	0m0.005s
-sys	0m0.007s
+real	0m0.442s
+user	0m0.124s
+sys	0m0.174s
 ```
 
-So that's 3s wallclock time for the default image, and 1s for the CRaC image. 
+So that's 2s wallclock time for the default image, and under half a second for the CRaC image. 
 ## Notes
 
 ---
