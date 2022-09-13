@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 execute() {
-    curl --silent --retry 200 --retry-delay 0 --retry-all-errors http://localhost:8080/hello/tim
+  while ! curl -s http://localhost:8080/hello/tim; do sleep 0.001; done
 }
 
 CONTAINER=$(docker run -d --rm -p 8080:8080 --privileged $1)
